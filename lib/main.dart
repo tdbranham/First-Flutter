@@ -8,7 +8,6 @@ void main() {
 }
 
 class TannersApp extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -29,8 +28,18 @@ class _TannersAppState extends State<TannersApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'What US region did you grow up in?',
-      'Where is your dream city?',
+      {
+        'questionText': 'What US region did you grow up in?',
+        'answers': ['East Coast', 'West Coast', 'South', 'Midwest'],
+      },
+      {
+        'questionText': 'Where is your dream city?',
+        'answers': ['Seattle', 'Los Angeles', 'New York'],
+      },
+      {
+        'questionText': 'What is your favorite color?',
+        'answers': ['Blue', 'Green', 'Red'],
+      }
     ];
 
     return MaterialApp(
@@ -41,11 +50,12 @@ class _TannersAppState extends State<TannersApp> {
         body: Column(
           children: [
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionText'],
             ),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
