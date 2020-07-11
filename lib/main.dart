@@ -10,24 +10,14 @@ void main() {
 class TannersApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+    // ignore: todo
     // TODO: implement createState
     return _TannersAppState();
   }
 }
 
 class _TannersAppState extends State<TannersApp> {
-  var _questionIndex = 0;
-
-  void _answerQuestion() {
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
-    print(_questionIndex);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var questions = [
+  final questions = const [
       {
         'questionText': 'What US region did you grow up in?',
         'answers': ['East Coast', 'West Coast', 'South', 'Midwest'],
@@ -41,6 +31,21 @@ class _TannersAppState extends State<TannersApp> {
         'answers': ['Blue', 'Green', 'Red'],
       }
     ];
+
+  var _questionIndex = 0;
+
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
+    if ( _questionIndex < questions.length) {
+      print('Next question')
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return MaterialApp(
       home: Scaffold(
