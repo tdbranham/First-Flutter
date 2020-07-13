@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   runApp(TannersApp());
@@ -17,7 +17,7 @@ class TannersApp extends StatefulWidget {
 }
 
 class _TannersAppState extends State<TannersApp> {
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What US region did you grow up in?',
       'answers': ['East Coast', 'West Coast', 'South', 'Midwest'],
@@ -39,7 +39,7 @@ class _TannersAppState extends State<TannersApp> {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print('Next question');
     } else {
       print('No more questions');
@@ -53,21 +53,13 @@ class _TannersAppState extends State<TannersApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                    questions[_questionIndex]['questionText'],
-                  ),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : Center(
-                child: Text('You did it!'),
-              ),
+            : Result(),
       ),
     );
   }
