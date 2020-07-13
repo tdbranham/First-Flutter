@@ -20,21 +20,45 @@ class _TannersAppState extends State<TannersApp> {
   final _questions = const [
     {
       'questionText': 'What US region did you grow up in?',
-      'answers': ['East Coast', 'West Coast', 'South', 'Midwest'],
+      'answers': [
+        {'text': 'East Coast', 'score': 10},
+        {'text': 'West Coast', 'score': 7},
+        {'text': 'South', 'score': 2},
+        {'text': 'Midwest', 'score': 5}
+      ],
     },
     {
       'questionText': 'Where is your dream city?',
-      'answers': ['Seattle', 'Los Angeles', 'New York'],
+      'answers': [
+        {'text': 'Seattle', 'score': 10},
+        {'text': 'Los Aneles', 'score': 7},
+        {'text': 'New York', 'score': 2},
+        {'text': 'Chicago', 'score': 5}
+      ],
     },
     {
       'questionText': 'What is your favorite color?',
-      'answers': ['Blue', 'Green', 'Red'],
+      'answers': [
+        {'text': 'Red', 'score': 10},
+        {'text': 'Blue', 'score': 7},
+        {'text': 'Green', 'score': 2},
+        {'text': 'Purple', 'score': 5}
+      ],
     }
   ];
 
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    setState(() {
+    _questionIndex = 0;
+    _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -59,7 +83,7 @@ class _TannersAppState extends State<TannersApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
