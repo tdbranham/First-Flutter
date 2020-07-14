@@ -52,8 +52,8 @@ class _TannersAppState extends State<TannersApp> {
 
   void _resetQuiz() {
     setState(() {
-    _questionIndex = 0;
-    _totalScore = 0;
+      _questionIndex = 0;
+      _totalScore = 0;
     });
   }
 
